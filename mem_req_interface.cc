@@ -1,5 +1,5 @@
 #include "mem_req_interface.h"
-cache_interface_req::cache_interface_req(ReadType t,
+cache_interface_req::cache_interface_req(AccessType t,
                                          unsigned w,
                                          unsigned cl,
                                          unsigned co,

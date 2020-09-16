@@ -7,7 +7,7 @@
 #include <vector>
 #include <tuple>
 #include <assign_wrap.h>
-enum class ReadType
+enum class AccessType
 {
     ReadWatcher,
     WatcherReadValue,
@@ -19,26 +19,26 @@ enum class ReadType
 };
 
 template <typename OSTYPE>
-OSTYPE &operator<<(OSTYPE &os, const ReadType &req)
+OSTYPE &operator<<(OSTYPE &os, const AccessType &req)
 {
     switch (req)
     {
-    case ReadType::ReadWatcher:
+    case AccessType::ReadWatcher:
         os << "ReadWatcher";
         break;
-    case ReadType::WatcherReadValue:
+    case AccessType::WatcherReadValue:
         os << "WatcherReadValue";
         break;
-    case ReadType::ReadClauseData:
+    case AccessType::ReadClauseData:
         os << "ReadClauseData";
         break;
-    case ReadType::ReadClauseValue:
+    case AccessType::ReadClauseValue:
         os << "ReadClauseValue";
         break;
-    case ReadType::writeWatcherList:
+    case AccessType::writeWatcherList:
         os << "writeWatcherList";
         break;
-    case ReadType::writeClause:
+    case AccessType::writeClause:
         os << "writeClause";
         break;
     default:
@@ -50,13 +50,13 @@ OSTYPE &operator<<(OSTYPE &os, const ReadType &req)
 
 struct cache_interface_req
 {
-    cache_interface_req(ReadType t,
+    cache_interface_req(AccessType t,
                         unsigned w,
                         unsigned cl,
                         unsigned co,
                         assign_wrap *a);
     bool operator==(const cache_interface_req &other) const;
-    ReadType type;
+    AccessType type;
     unsigned watcherId;
     unsigned clauseId;
     unsigned ComponentId;

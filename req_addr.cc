@@ -11,30 +11,30 @@ uint64_t get_addr_by_req(const std::unique_ptr<cache_interface_req> &req)
     auto clauseId = req->clauseId;
     switch (type)
     {
-    case ReadType::ReadClauseData:
+    case AccessType::ReadClauseData:
         /* code */
 
         addr = as->get_clause_addr(watcherId);
         addr += clauseId * 4;
 
         break;
-    case ReadType::ReadClauseValue:
+    case AccessType::ReadClauseValue:
         addr = as->get_clause_detail(watcherId)[clauseId];
         break;
-    case ReadType::ReadWatcher:
+    case AccessType::ReadWatcher:
         assert(as != nullptr);
         addr = as->get_addr();
         addr += 4 * watcherId;
         break;
-    case ReadType::WatcherReadValue:
+    case AccessType::WatcherReadValue:
         assert(as->get_watcher_size() != 0);
         addr = as->get_block_addr(watcherId);
 
         break;
-    case ReadType::writeClause:
+    case AccessType::writeClause:
         addr = as->get_clause_addr(watcherId);
         break;
-    case ReadType::writeWatcherList:
+    case AccessType::writeWatcherList:
         if (as->get_is_push_to_other(watcherId))
             addr = as->get_pushed_watcher_list_tail_addr(watcherId);
         else
