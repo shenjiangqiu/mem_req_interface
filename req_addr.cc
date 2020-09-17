@@ -21,12 +21,12 @@ uint64_t get_addr_by_req(const std::unique_ptr<cache_interface_req> &req)
     case AccessType::ReadClauseValue:
         addr = as->get_clause_detail(watcherId)[clauseId];
         break;
-    case AccessType::ReadWatcher:
+    case AccessType::ReadWatcherData:
         assert(as != nullptr);
         addr = as->get_addr();
         addr += 4 * watcherId;
         break;
-    case AccessType::WatcherReadValue:
+    case AccessType::ReadWatcherValue:
         assert(as->get_watcher_size() != 0);
         addr = as->get_block_addr(watcherId);
 

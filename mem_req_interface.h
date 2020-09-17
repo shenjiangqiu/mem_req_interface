@@ -9,25 +9,39 @@
 #include <assign_wrap.h>
 enum class AccessType
 {
-    ReadWatcher,
-    WatcherReadValue,
+    ReadWatcherData,
+    ReadWatcherValue,
     ReadClauseData,
     ReadClauseValue,
     writeWatcherList,
     writeClause,
     max
 };
-
+struct cache_interface_req
+{
+    cache_interface_req(AccessType t,
+                        unsigned w,
+                        unsigned cl,
+                        unsigned co,
+                        assign_wrap *a);
+    bool operator==(const cache_interface_req &other) const;
+    AccessType type;
+    unsigned watcherId;
+    unsigned clauseId;
+    unsigned ComponentId;
+    assign_wrap *as;
+    /* data */
+};
 template <typename OSTYPE>
 OSTYPE &operator<<(OSTYPE &os, const AccessType &req)
 {
     switch (req)
     {
-    case AccessType::ReadWatcher:
-        os << "ReadWatcher";
+    case AccessType::ReadWatcherData:
+        os << "ReadWatcherData";
         break;
-    case AccessType::WatcherReadValue:
-        os << "WatcherReadValue";
+    case AccessType::ReadWatcherValue:
+        os << "ReadWatcherValue";
         break;
     case AccessType::ReadClauseData:
         os << "ReadClauseData";
@@ -48,21 +62,6 @@ OSTYPE &operator<<(OSTYPE &os, const AccessType &req)
     return os;
 }
 
-struct cache_interface_req
-{
-    cache_interface_req(AccessType t,
-                        unsigned w,
-                        unsigned cl,
-                        unsigned co,
-                        assign_wrap *a);
-    bool operator==(const cache_interface_req &other) const;
-    AccessType type;
-    unsigned watcherId;
-    unsigned clauseId;
-    unsigned ComponentId;
-    assign_wrap *as;
-    /* data */
-};
 template <typename OSTYPE>
 OSTYPE &operator<<(OSTYPE &os, const cache_interface_req &req)
 {
