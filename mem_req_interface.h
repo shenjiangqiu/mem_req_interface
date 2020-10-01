@@ -61,6 +61,10 @@ struct cache_interface_req
     unsigned clauseId;
     unsigned ComponentId;
     assign_wrap *as;
+    int m_msg_src;
+    int m_msg_dst;
+    int m_msg_type;
+    int m_size;
     /* data */
 };
 template <typename OSTYPE>
