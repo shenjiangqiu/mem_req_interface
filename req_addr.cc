@@ -31,10 +31,10 @@ uint64_t get_addr_by_req(const std::unique_ptr<cache_interface_req> &req)
         addr = as->get_block_addr(watcherId);
 
         break;
-    case AccessType::writeClause:
+    case AccessType::WriteClause:
         addr = as->get_clause_addr(watcherId);
         break;
-    case AccessType::writeWatcherList:
+    case AccessType::WriteWatcherList:
         if (as->get_is_push_to_other(watcherId))
             addr = as->get_pushed_watcher_list_tail_addr(watcherId);
         else
@@ -43,6 +43,11 @@ uint64_t get_addr_by_req(const std::unique_ptr<cache_interface_req> &req)
         }
 
         break;
+    case AccessType::WriteMissRead:
+    case AccessType::EvictWrite:
+        addr = req->addr;
+        break;
+
     default:
         throw;
         break;

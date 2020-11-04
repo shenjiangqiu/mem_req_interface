@@ -15,8 +15,10 @@ enum class AccessType
     ReadWatcherValue,
     ReadClauseData,
     ReadClauseValue,
-    writeWatcherList,
-    writeClause,
+    WriteWatcherList,
+    WriteClause,
+    EvictWrite,
+    WriteMissRead,
     max
 };
 struct cache_interface_req
@@ -32,6 +34,7 @@ struct cache_interface_req
     cache_interface_req(cache_interface_req &&other);
     bool operator==(const cache_interface_req &other) const;
     AccessType type;
+    uint64_t addr;
     unsigned watcherId;
     unsigned clauseId;
     unsigned ComponentId;
@@ -59,11 +62,17 @@ OSTYPE &operator<<(OSTYPE &os, const AccessType &req)
     case AccessType::ReadClauseValue:
         os << "ReadClauseValue";
         break;
-    case AccessType::writeWatcherList:
-        os << "writeWatcherList";
+    case AccessType::WriteWatcherList:
+        os << "WriteWatcherList";
         break;
-    case AccessType::writeClause:
-        os << "writeClause";
+    case AccessType::WriteClause:
+        os << "WriteClause";
+        break;
+    case AccessType::WriteMissRead:
+        os << "WriteMissRead";
+        break;
+    case AccessType::EvictWrite:
+        os << "EvictWrite";
         break;
     default:
         throw;
