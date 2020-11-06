@@ -13,6 +13,7 @@ enum class AccessType
 {
     ReadWatcherData,
     ReadWatcherValue,
+    ReadWatcherMetaData,
     ReadClauseData,
     ReadClauseValue,
     WriteWatcherList,
@@ -52,6 +53,9 @@ OSTYPE &operator<<(OSTYPE &os, const AccessType &req)
     {
     case AccessType::ReadWatcherData:
         os << "ReadWatcherData";
+        break;
+    case AccessType::ReadWatcherMetaData:
+        os << "ReadWatcherMetaData";
         break;
     case AccessType::ReadWatcherValue:
         os << "ReadWatcherValue";

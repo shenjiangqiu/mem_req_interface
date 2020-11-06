@@ -47,7 +47,11 @@ uint64_t get_addr_by_req(const std::unique_ptr<cache_interface_req> &req)
     case AccessType::EvictWrite:
         addr = req->addr;
         break;
+    case AccessType::ReadWatcherMetaData:
+        addr = req->as->get_watcher_list_meta_addr();
+        break;
 
+        
     default:
         throw;
         break;

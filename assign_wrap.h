@@ -84,6 +84,14 @@ public:
     {
         return blocker_value_addr.at(index);
     }
+    void set_watcher_list_meta_addr(uint64_t addr)
+    {
+        watcher_list_addr = addr;
+    }
+    uint64_t get_watcher_list_meta_addr() const
+    {
+        return watcher_list_addr;
+    }
 
 private:
     std::map<int, uint64_t> blocker_value_addr;
@@ -104,7 +112,9 @@ private:
     int clause_size;
 
     unsigned level;
-    unsigned long long addr;
+    unsigned long long addr; //store the data of the start of the watcher list.
+
+    unsigned long long watcher_list_addr = 0; //store the addr of the watcher list meta data.
 };
 
 class assign_wrap_factory
