@@ -56,10 +56,7 @@ public:
                 assign_wrap *depend_value,
                 unsigned level = 0) : value(value),
                                       watcher_size(watcher_size),
-                                      depend_id(depend_id),
-                                      depend_value(depend_value),
                                       generated_conf(-1),
-                                      clause_size(0),
                                       level(level)
     {
     }
@@ -99,8 +96,7 @@ private:
     //unsigned long long clause_addr;
     int value;
     int watcher_size;
-    int depend_id;
-    assign_wrap *depend_value;
+
     //std::pair<int, assign_wrap*> Depends;
     std::map<int, unsigned long long> clause_addr;
     std::map<int, std::vector<unsigned long long>> clause_detail;
@@ -109,7 +105,7 @@ private:
     std::map<int, std::vector<int>> clause_literals;
     std::map<int, assign_wrap *> generated_assignments;       // must make the ptr weak here to break circular;
     std::map<int, unsigned long long> pushed_other_list_addr; //the addr of the pushed watcher list
-    int clause_size;
+    
 
     unsigned level;
     unsigned long long addr; //store the data of the start of the watcher list.
