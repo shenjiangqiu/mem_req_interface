@@ -15,6 +15,10 @@ public:
     {
         return clause_addr.find(index) != clause_addr.end();
     }
+    int get_clause_id(int w) const
+    {
+        return clause_id.at(w);
+    }
     assign_wrap() = delete;
     void add_pushed_list(int index, int value) { pushed_other_list_items.insert(std::make_pair(index, value)); }
     void add_pushed_addr(int index, unsigned long long addr) { pushed_other_list_addr.insert(std::make_pair(index, addr)); }
@@ -60,6 +64,10 @@ public:
                                       level(level)
     {
     }
+    void set_clause_id(int w, int c)
+    {
+        clause_id[w] = c;
+    }
     assign_wrap(assign_wrap &other) = default;
     assign_wrap(assign_wrap &&other) = default;
     assign_wrap(const assign_wrap &other) = default;
@@ -96,6 +104,7 @@ private:
     //unsigned long long clause_addr;
     int value;
     int watcher_size;
+    std::map<int, int> clause_id;
 
     //std::pair<int, assign_wrap*> Depends;
     std::map<int, unsigned long long> clause_addr;
@@ -105,7 +114,6 @@ private:
     std::map<int, std::vector<int>> clause_literals;
     std::map<int, assign_wrap *> generated_assignments;       // must make the ptr weak here to break circular;
     std::map<int, unsigned long long> pushed_other_list_addr; //the addr of the pushed watcher list
-    
 
     unsigned level;
     unsigned long long addr; //store the data of the start of the watcher list.
