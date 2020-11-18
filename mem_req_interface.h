@@ -44,6 +44,8 @@ struct cache_interface_req
     int m_msg_dst;
     int m_msg_type;
     int m_size;
+    short icnt_from = -1;
+    short icnt_to = -1;
     /* data */
 };
 template <typename OSTYPE>
