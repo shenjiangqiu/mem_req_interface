@@ -27,6 +27,7 @@ cache_interface_req::cache_interface_req(const cache_interface_req &other) : mid
                                                                              ComponentId(other.ComponentId),
                                                                              as(other.as)
 {
+    
 }
 cache_interface_req::cache_interface_req(cache_interface_req &&other) : mid(global_id++),
                                                                         type(other.type),
