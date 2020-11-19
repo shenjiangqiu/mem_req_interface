@@ -34,7 +34,7 @@ public:
     }
     auto get_is_push_to_other(int index) const
     {
-        return pushed_other_list_items.find(index) != pushed_other_list_items.end();
+        return pushed_other_list_items.count(index) != 0;
     }
     auto get_modified_by_range(int start, int end) const
     {
@@ -56,8 +56,8 @@ public:
 
     assign_wrap(int value,
                 int watcher_size,
-                int depend_id,
-                assign_wrap *depend_value,
+                int,
+                assign_wrap *,
                 unsigned level = 0) : value(value),
                                       watcher_size(watcher_size),
                                       generated_conf(-1),
