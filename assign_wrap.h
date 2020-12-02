@@ -97,9 +97,18 @@ public:
     {
         return watcher_list_addr;
     }
+    uint64_t get_other_watcher_list_meta_data(int index) const
+    {
+        return other_watcher_list_meta_data.at(index);
+    }
+    void set_other_watcher_list_meta_data(int index, uint64_t addr)
+    {
+        other_watcher_list_meta_data[index] = addr;
+    }
 
 private:
     std::map<int, uint64_t> blocker_value_addr;
+    std::map<int, uint64_t> other_watcher_list_meta_data;
 
     //unsigned long long clause_addr;
     int value;

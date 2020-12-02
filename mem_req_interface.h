@@ -20,6 +20,7 @@ enum class AccessType
     WriteClause,
     EvictWrite,
     WriteMissRead,
+    ReadOtherWatcherList,
     max
 };
 struct cache_interface_req
@@ -79,6 +80,9 @@ OSTYPE &operator<<(OSTYPE &os, const AccessType &req)
         break;
     case AccessType::EvictWrite:
         os << "EvictWrite";
+        break;
+    case AccessType::ReadOtherWatcherList:
+        os << "ReadOtherWatcherList";
         break;
     default:
         throw;
