@@ -11,7 +11,7 @@
 
 extern unsigned int global_id;
 enum class AccessType {
-    ReadWatcherData = 0,
+    ReadWatcherData = 10,
     ReadWatcherValue,
     ReadWatcherMetaData,
     ReadClauseData,
@@ -25,10 +25,11 @@ enum class AccessType {
 };
 
 
-
 struct cache_interface_req {
 
-    unsigned mid;
+    unsigned mid{};
+
+    cache_interface_req() {}
 
     cache_interface_req(AccessType t,
                         unsigned w,
@@ -43,15 +44,15 @@ struct cache_interface_req {
     bool operator==(const cache_interface_req &other) const;
 
     AccessType type;
-    uint64_t addr;
-    unsigned watcherId;
-    unsigned clauseId;
-    unsigned ComponentId;
-    assign_wrap *as;
-    int m_msg_src;
-    int m_msg_dst;
-    int m_msg_type;
-    int m_size;
+    uint64_t addr{};
+    unsigned watcherId{};
+    unsigned clauseId{};
+    unsigned ComponentId{};
+    assign_wrap *as{};
+    int m_msg_src{};
+    int m_msg_dst{};
+    int m_msg_type{};
+    int m_size{};
     short icnt_from = -1;
     short icnt_to = -1;
     /* data */
